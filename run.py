@@ -75,6 +75,8 @@ else:
     print('Text: %s, Num: %s' % (text, num))
     # Create new commit message with new count
     new_message = '%s #%d' % (text, next_num)
+    new_message += '\n\n'
+    new_message += 'Command: %s' % (command)
     print('New message: %s' % new_message)
     # Commit
     commit_hash = subprocess.check_output(['git','commit-tree',tree_hash,'-p','HEAD','-p','refs/exprunner/lastexecution','-m',new_message])
@@ -85,6 +87,13 @@ print('Commit hash: %s' % commit_hash)
 subprocess.check_output('git update-ref refs/exprunner/lastexecution {commit_hash}'
         .format(commit_hash=commit_hash)
         .split(' '))
+
+# Execute command here
+process = subprocess.Popen(command)
+process.wait()
+
+# TODO: Send email once done
+print('Done execution. Should send e-mail notification here.')
 
 """
 Tests:

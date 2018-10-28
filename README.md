@@ -7,8 +7,8 @@
 # Plan
 
 * Everything can be saved as git objects
-* Commit names can be something simple like "execution #n" where `n` just increments with each execution.
 * Each execution can be a separate commit whose parent is HEAD and the last execution
+* Commit names can be something simple like "execution #n" where `n` just increments with each execution.
 * A ref (refs/exprunner/lastexecution) will point to the last execution.
 * Notes on each execution can be saved with git notes.
 * Information to store in the commit message:
@@ -17,4 +17,7 @@
 	* Directory in which the command was executed
 	* Machine that the command was executed on
 
-Note: There's still the problem of machine state at time of execution. Some scripts are not run with a clean slate, and depend on other scripts being run before it. I don't know how I'd keep track of this.
+# TODO
+* There's still the problem of machine state at time of execution. Some scripts are not run with a clean slate, and depend on other scripts being run before it. I don't know how I'd keep track of this.
+* What if there are two executions on separate machines and different copies of the repo? It won't be possible to merge the executions together because of conflicting execution names. Maybe name the executions after the date of execution instead?
+* What happens to the executions if I rebase?
